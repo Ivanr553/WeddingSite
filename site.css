@@ -52,11 +52,11 @@ body {
 
 .hamburger-menu {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 10px;
+    right: 10px;
     z-index: 1000;
     background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 10px;
+    border-radius: 4px;
     cursor: pointer;
 }
 
@@ -135,6 +135,7 @@ section h3 {
 #save-the-date {
     /* background-color: white; */
     margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .date-location {
@@ -162,7 +163,7 @@ section h3 {
 /* Details section */
 #details {
     background-color: white;
-    /* margin-bottom: 40px; */
+    margin-bottom: 40px;
 }
 
 .schedule,
@@ -182,10 +183,6 @@ section h3 {
 }
 
 /* RSVP section */
-#rsvp {
-    background-color: rgb(250, 250, 250);
-}
-
 .rsvp-form {
     max-width: 300px;
     margin: 0 auto;
