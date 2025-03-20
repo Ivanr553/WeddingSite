@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,210 @@
     <link rel="stylesheet" href="./site.css">
     <link as="font" href="./fonts/Adelio-Darmanto-Font.otf" />
 </head>
+
 <body>
-   <div class="banner">
+    <div class="hamburger-menu">
+        <div class="menu-icon" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="menu-items">
+            <a href="#home" onclick="toggleMenu(true)">Home</a>
+            <a href="#save-the-date" onclick="toggleMenu(true)">Save the Date</a>
+            <a href="#story" onclick="toggleMenu(true)">Our Story</a>
+            <a href="#details" onclick="toggleMenu(true)">Details</a>
+            <a href="#rsvp" onclick="toggleMenu(true)">RSVP</a>
+        </nav>
+    </div>
+
+    <div id="home" class="banner">
         <div class="bannerText">Ivan & Jenna</div>
         <img class="bannerImg" src="./images/WalnutGrove.avif" />
     </div>
+
+    <section id="save-the-date">
+        <div class="date-location">
+            <h2>Save the Date!</h2>
+            <p>August 8th, 2025</p>
+            <p>Walnut Grove</p>
+            <p>Moorpark, California</p>
+        </div>
+    </section>
+
+    <div id="carousel" class="carousel-container">
+        <div class="carousel-slides">
+            <div class="slide fade">
+                <img src="./images/WalnutGrove.avif" alt="Ivan and Jenna 1">
+            </div>
+            <div class="slide fade">
+                <img src="./images/walnutgrove2.avif" alt="Ivan and Jenna 2">
+            </div>
+            <div class="slide fade">
+                <img src="./images/walnutgrove3.avif" alt="Ivan and Jenna 3">
+            </div>
+        </div>
+    </div>
+
+    <section id="story">
+        <h2>Proposal Story</h2>
+        <div class="timeline-event">
+            <p>[Proposal story]</p>
+        </div>
+    </section>
+
+    <section id="details">
+        <h2>Wedding Details</h2>
+        <div class="schedule">
+            <h3>Wedding Day Schedule</h3>
+            <ul>
+                <li>
+                    <strong>Ceremony:</strong>
+                    <time>[Time]</time>
+                </li>
+                <li>
+                    <strong>Cocktail Hour:</strong>
+                    <time>[Time]</time>
+                </li>
+                <li>
+                    <strong>Reception:</strong>
+                    <time>[Time]</time>
+                </li>
+            </ul>
+        </div>
+
+        <div class="accommodation">
+            <h3>Accommodation</h3>
+            <p>For anyone out-of-town, we've arranged special rates at:</p>
+            <ul>
+                <li>[Hotel 1]</li>
+                <li>[Hotel 2]</li>
+            </ul>
+        </div>
+
+        <div class="registry">
+            <h3>Registry</h3>
+            <p>We're honored to have you celebrate with us. If you'd like to help us start our new life together, we're
+                registered at:</p>
+            <ul>
+                <li>[Registry 1]</li>
+                <li>[Registry 2]</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="rsvp">
+        <h2>RSVP</h2>
+        <form class="rsvp-form" onsubmit="sendRSVP(event)">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="partner">Partner/Spouse Full Name</label>
+                <input type="text" id="partner" name="partner" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="attending">Will you be attending?</label>
+                <select id="attending" name="attending" required>
+                    <option value="">Please select</option>
+                    <option value="yes">Heck Yes!</option>
+                    <option value="no">Unfortunately Not</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="Children">Number of Children Attending</label>
+                <input type="number" placeholder="0" id="Children" name="Children" min="0" max="4">
+            </div>
+
+            <button type="submit">Send RSVP</button>
+        </form>
+    </section>
+
+    <script>
+        function toggleMenu(close) {
+            const menuItems = document.querySelector('.menu-items');
+            if (close) {
+                menuItems.classList.remove('active');
+            } else {
+                menuItems.classList.toggle('active');
+            }
+        }
+
+        async function sendRSVP(e) {
+            e.preventDefault();
+            const form = document.querySelector('.rsvp-form');
+            const formData = new FormData(form);
+
+            const data = {
+                name: formData.get('name'),
+                partner: formData.get('partner'),
+                email: formData.get('email'),
+                attending: formData.get('attending'),
+                children: formData.get('Children') == '' ? 0 : formData.get('Children')
+            };
+
+            const request = await fetch('https://ivanjennawedding.ivanr553.workers.dev/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': 'no-cors',
+                    'Origin': 'https://ivanjennawedding.com'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const response = await request.json();
+        }
+
+        function startCarousel() {
+            const slides = document.getElementsByClassName("slide");
+            let currentSlide = 0;
+            let nextSlide = 1;
+
+            function showSlides() {
+                // Remove active class from all slides except current
+                for (let i = 0; i < slides.length; i++) {
+                    if (i !== currentSlide) {
+                        slides[i].classList.remove('active');
+                    }
+                }
+
+                // Add next-active class to next slide
+                slides[nextSlide].classList.add('next-active');
+
+                // After a brief delay, complete the transition
+                setTimeout(() => {
+                    slides[currentSlide].classList.remove('active');
+                    slides[nextSlide].classList.remove('next-active');
+                    slides[nextSlide].classList.add('active');
+
+                    // Update indices
+                    currentSlide = nextSlide;
+                    nextSlide = (nextSlide + 1) % slides.length;
+                }, 50);
+
+                // Change slide every 6 seconds
+                setTimeout(showSlides, 6000);
+            }
+
+            // Show first slide immediately
+            slides[0].classList.add('active');
+            // Start the carousel
+            setTimeout(showSlides, 4000);
+        }
+
+        // Start the carousel when the page loads
+        window.addEventListener('load', startCarousel);
+    </script>
 </body>
-<script src="https://cdn.tailwindcss.com"></script>
+
 </html>
