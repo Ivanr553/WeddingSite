@@ -1,3 +1,38 @@
-.test {
-    color: 'red'
+@font-face {
+    font-family: 'WeddingFont';
+    src: url('./fonts/Adelio-Darmanto-Font.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+    width: 100vw;
+}
+
+.bannerText {
+    font-family: 'WeddingFont';
+    position: absolute;
+    left: auto;
+    top: auto;
+    font-size: 60px;
+    color: white;
+    z-index: 1;
+
+    @media (min-width: 600px) {
+        font-size: 120px;
+    }
+}
+
+.bannerImg {
+    width: 100%;
+    height: auto;
+    z-index: 0;
+    overflow: hidden;
 }
