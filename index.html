@@ -7,6 +7,12 @@
     <title>Ivan and Jenna</title>
     <link rel="stylesheet" href="./site.css">
     <link as="font" href="./fonts/Adelio-Darmanto-Font.otf" />
+
+    <meta property="og:title" content="Ivan And Jenna" />
+    <meta property="og:description" content="We're getting married! Save the date!" />
+    <meta property="og:image" content="https://www.jennaivan.wedding/images/preview.jpg" />
+    <meta property="og:url" content="https://www.jennaivan.wedding/" />
+    <meta property="og:type" content="website" />
 </head>
 
 <body>
@@ -33,9 +39,9 @@
     <section id="save-the-date">
         <div class="date-location">
             <h2>Save the Date!</h2>
-            <p>August 8th, 2025</p>
-            <p>Walnut Grove</p>
-            <p>Moorpark, California</p>
+            <div>August 8th, 2025</div>
+            <div>Walnut Grove</div>
+            <div>Moorpark, California</div>
         </div>
     </section>
 
@@ -56,7 +62,29 @@
     <section id="story">
         <h2>Proposal Story</h2>
         <div class="timeline-event">
-            <p>[Proposal story]</p>
+            <p> In December of 2023 Ivan took Jenna out to dinner for a last night of peace and quiet before they went
+                up
+                and celebrated the holidays with their families. The idea of going out to dinner was so spontaneous and
+                exciting, Jenna didn’t think anything of it! With the reservations Jenna and Ivan walked up to NOBU in
+                Newport Beach, the same place they started the year for Jenna’s birthday that January. With Coffees in
+                their hands, the hosts said yes they were available right away and escorted them to a table.
+            </p>
+            <p> The whole dinner was so much fun! Right before dessert, Ivan escorted himself to the restroom and his
+                coat was thrown on the chair, so Jenna went to pick it up and place it nicely over the chair. As she
+                picks it up and places it on the chair, it dawns on her that it could be the night. She picks up the
+                jacket again and “smooths it out” Feeling nothing she places it back on the chair and doesn’t think
+                about it again. Dinner was so early Jenna and Ivan wanted to keep enjoying the night after it, Ivan
+                suggested a nice walk on the beach. On the way to the beach Jenna was enjoying all the Holiday lights
+                and just being in the fun date night moment.
+            </p>
+            <p> They get to Crystal Cove in Newport Beach, walk over to the overlook cliff and under the bright moon
+                enjoying
+                the sounds of the ocean Ivan call Jenna’s name a couple of times because she was enjoying the view. She
+                looked over and he was on one knee. He was nervous, she was freaking out and in the end she said YES! As
+                he was placing the ring on, she tells him, wrong hand! Trying to take it off it falls to the ground and
+                everyone holds their breath and gasps. Feww, it did not fall threw the wooden boards He picks it up and
+                places it on the correct hand. As they walk back to the car she stops and says, “wait did I tell you
+                yes?” They laugh and the rests is history. </p>
         </div>
     </section>
 
@@ -102,7 +130,7 @@
 
     <section id="rsvp">
         <h2>RSVP</h2>
-        <form class="rsvp-form" onsubmit="sendRSVP(event)">
+        <form id="rsvp-form" class="rsvp-form" onsubmit="sendRSVP(event)">
             <div class="form-group">
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required>
@@ -148,28 +176,54 @@
 
         async function sendRSVP(e) {
             e.preventDefault();
-            const form = document.querySelector('.rsvp-form');
-            const formData = new FormData(form);
 
-            const data = {
-                name: formData.get('name'),
-                partner: formData.get('partner'),
-                email: formData.get('email'),
-                attending: formData.get('attending'),
-                children: formData.get('Children') == '' ? 0 : formData.get('Children')
-            };
+            try {
+                const form = document.querySelector('.rsvp-form');
+                const formData = new FormData(form);
 
-            const request = await fetch('https://ivanjennawedding.ivanr553.workers.dev/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': 'no-cors',
-                    'Origin': 'https://ivanjennawedding.com'
-                },
-                body: JSON.stringify(data)
-            });
+                const data = {
+                    name: formData.get('name'),
+                    partner: formData.get('partner'),
+                    email: formData.get('email'),
+                    attending: formData.get('attending'),
+                    children: formData.get('Children') == '' ? 0 : formData.get('Children')
+                };
 
-            const response = await request.json();
+                const request = await fetch('https://ivanjennawedding.ivanr553.workers.dev/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': 'no-cors'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const response = await request.json();
+
+                if (response.message == 'success') {
+                    const rsvpSection = document.querySelector('#rsvp-form');
+                    rsvpSection.innerHTML = `
+                        <div class="success-message">
+                            <h3>You've made the list!</h3>
+                        </div>
+                    `;
+                } else {
+                    const rsvpSection = document.querySelector('#rsvp-form');
+                    rsvpSection.innerHTML = `
+                        <div class="error-message">
+                            <h3>Oops! Something went wrong.</h3>
+                            <p>Please try again.</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                const rsvpSection = document.querySelector('#rsvp-form');
+                rsvpSection.innerHTML = `
+                    <div class="success-message">
+                        <h3>You've made the list!</h3>
+                    </div>
+                `;
+            }
         }
 
         function startCarousel() {
@@ -211,6 +265,7 @@
 
         // Start the carousel when the page loads
         window.addEventListener('load', startCarousel);
+
     </script>
 </body>
 
