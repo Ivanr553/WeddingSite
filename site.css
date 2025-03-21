@@ -1,5 +1,6 @@
 html {
     scroll-behavior: smooth;
+    user-select: none;
 }
 
 body {
@@ -18,15 +19,23 @@ body {
     font-style: normal;
 }
 
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
 .banner {
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: default;
-    user-select: none;
     position: relative;
     overflow: hidden;
     width: 100vw;
+    height: 66vh
 }
 
 .bannerText {
@@ -44,11 +53,23 @@ body {
 }
 
 .bannerImg {
-    width: 100%;
-    height: auto;
+    height: 100%;
     z-index: 0;
     overflow: hidden;
     filter: brightness(0.95);
+    object-fit: cover;
+
+    @media (max-width: 800px) {
+        display: none;
+    }
+}
+
+.bannerImgMain {
+    @media (max-width: 800px) {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
 }
 
 .hamburger-menu {
@@ -108,17 +129,13 @@ body {
 
 /* General section styling */
 section {
-    padding: 80px 20px;
-    max-width: 1200px;
+    padding: 20px 40px;
     margin: 0 auto;
     text-align: center;
     background-color: white;
     color: #6C4E28;
-}
-
-section h1 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
+    width: 85%;
+    max-width: 1000px;
 }
 
 section h2 {
@@ -132,37 +149,89 @@ section h3 {
     margin: 20px 0;
 }
 
-/* Home section */
-#save-the-date {
-    /* background-color: white; */
-    margin-top: 40px;
-    margin-bottom: 40px;
+.date-location {
+    line-height: 1.6;
 }
 
-.date-location {
-    margin: 20px 0 40px 0;
-    line-height: 1.6;
+.date-location h2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.date-location h3 {
+    font-size: 2em;
+    margin: 0px;
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    font-family: sans-serif;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+}
+
+.countdown-item span:first-child {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #6C4E28;
+}
+
+.countdown-item .label {
+    font-size: 0.9em;
+    text-transform: uppercase;
+    margin-top: 5px;
+    color: #6C4E28;
+}
+
+@media (max-width: 768px) {
+    .countdown-timer {
+        gap: 10px;
+    }
+
+    .countdown-item {
+        min-width: 60px;
+    }
+
+    .countdown-item span:first-child {
+        font-size: 1.8em;
+    }
+
+    .countdown-item .label {
+        font-size: 0.8em;
+    }
+}
+
+.us-slide {
+    width: 100%;
+    height: 50vh;
 }
 
 /* Story section */
 #story {
-    background-color: #F7F2E8;
+    background-color: white;
 }
 
 .timeline {
-    max-width: 800px;
     margin: 0 auto;
 }
 
 .timeline-event {
+    /* padding: 40px 20px; */
     margin: 40px 0;
-    padding: 20px;
     background-color: white;
     border-radius: 8px;
     font-size: 1.1em;
     line-height: 1.5;
     text-align: left;
     text-indent: 30px;
+    width: 100%;
 
     display: flex;
     flex-direction: column;
@@ -171,7 +240,6 @@ section h3 {
     gap: 5px;
 
     @media (min-width: 600px) {
-        padding: 20px 40px;
         font-size: 1.2em;
     }
 }
@@ -182,6 +250,7 @@ section h3 {
     margin-bottom: 40px;
 }
 
+.location-container,
 .schedule,
 .accommodation,
 .registry {
@@ -190,12 +259,14 @@ section h3 {
     padding: 20px;
 }
 
-.schedule ul,
-.accommodation ul,
-.registry ul {
+ul {
     list-style: none;
     padding: 0;
     line-height: 1.8;
+}
+
+#activities li {
+    line-height: 2.2;
 }
 
 /* RSVP section */
@@ -258,9 +329,89 @@ button[type="submit"]:hover {
     justify-content: center;
 }
 
+/* Activities section styling */
+.activities-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Firefox */
+    padding: 20px 0;
+}
+
+.activities-container::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari and Opera */
+}
+
+.activities-wrapper {
+    display: flex;
+    gap: 20px;
+    padding: 0 20px;
+    min-width: min-content;
+}
+
+.activity-card {
+    cursor: pointer;
+    flex: 0 0 300px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(108, 78, 40, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.activity-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.activity-content {
+    padding: 15px;
+    text-align: left;
+}
+
+.activity-title {
+    font-family: 'WeddingFont';
+    font-size: 1.8em;
+    margin: 0 0 5px 0;
+    color: #6C4E28;
+}
+
+.activity-location {
+    font-size: 0.9em;
+    color: #8B6434;
+    margin-bottom: 10px;
+}
+
+.activity-description {
+    font-size: 0.95em;
+    line-height: 1.5;
+    color: #6C4E28;
+}
+
+/* Adding general link styles */
+a {
+    color: #1787d1;
+    text-decoration: underline;
+    text-decoration-color: #0873ba;
+    /* lighter version of #6C4E28 */
+    text-underline-offset: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Excluding menu items from these styles since they have their own styling */
+.menu-items a {
+    text-decoration: none;
+}
+
+.menu-items a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
 /* Responsive design */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     section {
         padding: 40px 15px;
     }
@@ -270,11 +421,11 @@ button[type="submit"]:hover {
     }
 
     section h2 {
-        font-size: 1.75em;
+        font-size: 3em;
     }
 
     section h3 {
-        font-size: 1.25em;
+        font-size: 1.5em;
     }
 }
 
@@ -284,6 +435,15 @@ button[type="submit"]:hover {
     overflow: hidden;
     height: 600px;
     /* Set a fixed height */
+}
+
+#us-carousel {
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .carousel-slides {
