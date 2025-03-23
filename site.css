@@ -29,7 +29,7 @@ body {
 
 .banner {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     cursor: default;
     position: relative;
@@ -38,18 +38,17 @@ body {
     height: 66vh
 }
 
-.bannerText {
+.banner-text {
     font-family: 'WeddingFont';
     position: absolute;
     left: auto;
-    top: auto;
     font-size: 6em;
     color: white;
-    z-index: 1;
+    z-index: 2;
+    bottom: 10%;
 
     @media (max-width: 600px) {
         font-size: 4.5em;
-        bottom: 10%;
     }
 }
 
@@ -192,7 +191,7 @@ section h3 {
     color: #6C4E28;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .countdown-timer {
         gap: 10px;
     }
@@ -246,18 +245,69 @@ section h3 {
     }
 }
 
+.location-image {
+    width: 40vw;
+    max-width: 600px;
+    min-width: 300px;
+    height: 100%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+.map-container {
+    width: 100%;
+    height: 400px;
+    margin: 20px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(108, 78, 40, 0.1);
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .map-container {
+        height: 300px;
+    }
+}
+
 /* Details section */
-#details {
+#wedding-details {
     background-color: white;
 }
 
 .location-container,
 .schedule,
-.accommodation,
+.weather,
+.dress-code,
 .registry {
     max-width: 600px;
-    margin: 40px auto;
+    margin: 20px auto;
     padding: 20px;
+}
+
+.location-container {
+    padding: 0;
+}
+
+.location-text {
+    line-height: 0.9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.location-text a {
+    margin-bottom: 20px;
+}
+
+.location-text p {
+    margin: 5px 0;
 }
 
 ul {
@@ -268,6 +318,79 @@ ul {
 
 #activities li {
     line-height: 2.2;
+}
+
+/* Carousel Navigation Buttons */
+.carousel-nav {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(108, 78, 40, 0.9);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-button:hover {
+    background-color: rgba(139, 100, 52, 0.9);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-button:disabled {
+    background-color: rgba(108, 78, 40, 0.3);
+    cursor: not-allowed;
+    transform: translateY(-50%) scale(1);
+}
+
+.carousel-button.prev {
+    left: 10px;
+}
+
+.carousel-button.next {
+    right: 10px;
+}
+
+/* Arrow icons */
+.carousel-button::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-style: solid;
+    border-width: 2px 2px 0 0;
+    border-color: white;
+    display: inline-block;
+}
+
+.carousel-button.prev::before {
+    transform: rotate(-135deg);
+    margin-left: 4px;
+}
+
+.carousel-button.next::before {
+    transform: rotate(45deg);
+    margin-right: 4px;
+}
+
+@media (max-width: 600px) {
+    .carousel-button {
+        display: none;
+    }
 }
 
 /* RSVP section */
@@ -374,14 +497,14 @@ button[type="submit"]:hover {
 }
 
 .activity-title {
-    font-family: 'WeddingFont';
-    font-size: 1.8em;
+    font-size: 1.2em;
     margin: 0 0 5px 0;
     color: #6C4E28;
+    line-height: 1.5;
 }
 
 .activity-location {
-    font-size: 0.9em;
+    font-size: 0.85em;
     color: #8B6434;
     margin-bottom: 10px;
 }
@@ -441,6 +564,10 @@ a {
     }
 }
 
+#banner-carousel {
+    height: 600px;
+}
+
 #us-carousel {
     width: 100%;
     height: 50vh;
@@ -484,7 +611,7 @@ a {
 
 .fade {
     animation-name: fade;
-    animation-duration: 2s;
+    animation-duration: 2.5s;
 }
 
 @keyframes fade {
