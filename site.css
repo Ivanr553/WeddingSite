@@ -839,6 +839,10 @@ ul {
     box-shadow: 0 2px 8px rgba(108, 78, 40, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease;
+
+    @media (max-width: 768px) {
+        max-width: 35%;
+    }
 }
 
 .activity-image {
@@ -955,17 +959,20 @@ ul {
 
 /* RSVP section */
 .rsvp-form {
-    max-width: 300px;
+    width: 400px;
+    max-width: 90%;
     margin: 0 auto;
     text-align: left;
 
-    @media (min-width: 600px) {
-        max-width: 500px;
+    @media (min-width: 768px) {
+        max-width: unset;
+        width: 450px;
     }
 }
 
 .form-group {
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .form-group label {
@@ -999,6 +1006,7 @@ button[type="submit"] {
     font-size: 16px;
     width: 100%;
     transition: background-color 0.3s;
+    margin-top: 20px;
 }
 
 button[type="submit"]:hover {
