@@ -253,7 +253,7 @@
             <div class="dress-code">
                 <h3>Dress Code</h3>
                 <div class="dress-code-text"> Semi-formal</div>
-                <span>If you're looking for some inspiration, here are some color ideas for your dress or suit</span>
+                <span>If you're looking for some inspiration, here are some color ideas for your dress or suit.</span>
 
                 <div class="color-palette">
                     <div class="color-swatch" style="background-color: #6B705C;"></div>
@@ -517,7 +517,6 @@
             }
         }
 
-        // Update immediately and then every second
         update();
         const timer = setInterval(update, 1000);
     }
@@ -593,35 +592,28 @@
         let nextSlide = 1;
 
         function showSlides() {
-            // Remove active class from all slides except current
             for (let i = 0; i < slides.length; i++) {
                 if (i !== currentSlide) {
                     slides[i].classList.remove('active');
                 }
             }
 
-            // Add next-active class to next slide
             slides[nextSlide].classList.add('next-active');
             slides[nextSlide].classList.add('fade');
 
-            // After a brief delay, complete the transition
             setTimeout(() => {
                 slides[currentSlide].classList.remove('active');
                 slides[nextSlide].classList.remove('next-active');
                 slides[nextSlide].classList.add('active');
 
-                // Update indices
                 currentSlide = nextSlide;
                 nextSlide = (nextSlide + 1) % slides.length;
             }, 50);
 
-            // Change slide every 6 seconds
             setTimeout(() => showSlides(), carouselSpeed);
         }
 
-        // Show first slide immediately
         slides[0].classList.add('active');
-        // Start the carousel
         setTimeout(() => showSlides(), 4000);
     }
 
@@ -629,7 +621,7 @@
         const container = document.querySelector(containerId);
         const prevButton = document.querySelector(prevId);
         const nextButton = document.querySelector(nextId);
-        const scrollAmount = 320; // Adjust this value to control scroll distance
+        const scrollAmount = 320;
 
         function updateButtonStates() {
             const isAtStart = container.scrollLeft === 0;
@@ -655,13 +647,10 @@
             setTimeout(updateButtonStates, 100);
         });
 
-        // Update button states on scroll
         container.addEventListener('scroll', updateButtonStates);
 
-        // Initial button state
         updateButtonStates();
 
-        // Update button states when window resizes
         window.addEventListener('resize', updateButtonStates);
     }
 
