@@ -29,7 +29,7 @@
             <a href="#venue-details" onclick="toggleMenu(true)">Vanue Details</a>
             <a href="#wedding-details" onclick="toggleMenu(true)">Wedding Details</a>
             <a href="#accommodations" onclick="toggleMenu(true)">Accommodations</a>
-            <a href="#activities" onclick="toggleMenu(true)">Activities</a>
+            <a href="#activities" onclick="toggleMenu(true)">Nearby Activities</a>
             <a href="#food-drink" onclick="toggleMenu(true)">Food and Drink</a>
             <a href="#rsvp" onclick="toggleMenu(true)">RSVP</a>
         </nav>
@@ -37,9 +37,9 @@
 
     <div class="main-content">
         <div id="home" class="banner">
-            <div class="banner-text">Ivan & Jenna</div>
+            <div class="banner-text banner-text-mobile">Ivan & Jenna</div>
             <div id="banner-carousel" class="carousel-container">
-                <div class="slide banner-slide">
+                <div class="slide banner-slide active">
                     <img src="./images/1.jpeg" alt="Banner 1">
                 </div>
                 <div class="slide fade banner-slide">
@@ -48,6 +48,18 @@
                 <div class="slide fade banner-slide">
                     <img src="./images/3.jpeg" alt="Banner 1">
                 </div>
+            </div>
+            <div id="desktop-banner">
+                <div class="desktop-banner-image">
+                    <img src="./images/4.jpeg" alt="Desktop Banner 1">
+                </div>
+                <div class="desktop-banner-image">
+                    <img src="./images/1.jpeg" alt="Desktop Banner 2">
+                </div>
+                <div class="desktop-banner-image">
+                    <img src="./images/3.jpeg" alt="Desktop Banner 3">
+                </div>
+                <div class="banner-text">Ivan & Jenna</div>
             </div>
         </div>
 
@@ -151,78 +163,162 @@
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
 
-            <div class="weather">
+            <div class="weather-widget">
                 <h3>Expected Weather</h3>
-                <ul>
-                    <li>
-                        <strong>Temperature:</strong>
-                        <span>90F</span>
-                    </li>
-                    <li>
-                        <strong>Humidity:</strong>
-                        <span>5%</span>
-                    </li>
-                    <li>
-                        <strong>Precipitation:</strong>
-                        <span>0%</span>
-                    </li>
-                </ul>
+                <div class="weather-main">
+                    <div class="weather-icon-large">
+                        <svg viewBox="0 0 24 24">
+                            <path class="sun"
+                                d="M12 3v2m0 14v2M5.64 5.64l1.41 1.41m10.31 10.31l1.41 1.41M3 12h2m14 0h2M5.64 18.36l1.41-1.41m10.31-10.31l1.41-1.41M12 7c2.76 0 5 2.24 5 5s-2.24 5-5 5-5-2.24-5-5 2.24-5 5-5z" />
+                        </svg>
+                    </div>
+                    <div class="weather-temp">
+                        <span class="temp-value">77</span>
+                        <span class="temp-unit">°F</span>
+                        <div class="weather-desc">Sunny</div>
+                    </div>
+                </div>
+                <div class="weather-details">
+                    <div class="weather-detail-item">
+                        <svg class="weather-detail-icon" viewBox="0 0 24 24">
+                            <path d="M4 4h16v16H4z M8 8h8v8H8z" transform="rotate(45 12 12)" />
+                        </svg>
+                        <span>10 mph</span>
+                    </div>
+                    <div class="weather-detail-item">
+                        <svg class="weather-detail-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.1L7.5 6.6C6.8 7.3 6.3 8 6 8.9c-0.3 0.9-0.4 1.9-0.2 2.8 0.2 0.9 0.6 1.8 1.2 2.5 0.6 0.7 1.4 1.3 2.3 1.6 0.9 0.3 1.9 0.4 2.8 0.2 0.9-0.2 1.8-0.6 2.5-1.2s1.3-1.4 1.6-2.3c0.3-0.9 0.4-1.9 0.2-2.8" />
+                        </svg>
+                        <span>57%</span>
+                    </div>
+                </div>
             </div>
+
         </section>
 
         <section id="wedding-details">
             <h2>Wedding Details</h2>
+            <h3 id="wedding-schedule-title">Wedding Day Schedule</h3>
             <div class="schedule">
-                <h3>Wedding Day Schedule</h3>
-                <ul>
-                    <li>
-                        <strong>Arrival Time:</strong>
+
+                <div class="timeline-item">
+                    <div class="timeline-image">
+                        <img src="./images/welcome.png" alt="Arrival">
+                    </div>
+                    <div class="timeline-content">
+                        <h4>Arrival Time</h4>
                         <time>4:30 PM</time>
-                    </li>
-                    <li>
-                        <strong>Ceremony:</strong>
+                        <p>Join us as we gather to celebrate this special day. Please arrive early to find your seats
+                            and greet other guests.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-image">
+                        <img src="./images/ceremony.png" alt="Ceremony">
+                    </div>
+                    <div class="timeline-content">
+                        <h4>Ceremony</h4>
                         <time>5:00 PM</time>
-                    </li>
-                    <li>
-                        <strong>Cocktail Hour:</strong>
+                        <p>Witness our exchange of vows in a beautiful outdoor ceremony surrounded by nature and loved
+                            ones.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-image">
+                        <img src="./images/cocktail_hour.png" alt="Cocktail Hour">
+                    </div>
+                    <div class="timeline-content">
+                        <h4>Cocktail Hour</h4>
                         <time>6:00 PM</time>
-                    </li>
-                    <li>
-                        <strong>Reception:</strong>
+                        <p>Enjoy drinks and hors d'oeuvres while mingling with friends and family as we transition to
+                            the evening's festivities.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-image">
+                        <img src="./images/reception.png" alt="Reception">
+                    </div>
+                    <div class="timeline-content">
+                        <h4>Reception</h4>
                         <time>7:00 PM</time>
-                    </li>
-                </ul>
+                        <p>Celebrate with dinner, dancing, and merriment as we begin our new journey together.</p>
+                    </div>
+                </div>
             </div>
 
             <div class="dress-code">
                 <h3>Dress Code</h3>
-                <span>Semi-formal or cocktail attire</span>
+                <div class="dress-code-text"> Semi-formal</div>
+                <span>If you're looking for some inspiration, here are some color ideas for your dress or suit</span>
+
+                <div class="color-palette">
+                    <div class="color-swatch" style="background-color: #6B705C;"></div>
+                    <div class="color-swatch" style="background-color: #8B917A;"></div>
+                    <div class="color-swatch" style="background-color: #CB997E;"></div>
+                    <div class="color-swatch" style="background-color: #B6A59B;"></div>
+                    <div class="color-swatch" style="background-color: #DCD1C7;"></div>
+                </div>
             </div>
 
             <div class="registry">
                 <h3>Registry</h3>
-                <p>As we embark on this incredible journey together, your love and support mean the world to us. If
-                    you'd like to help us build our life together, a contribution would be truly cherished.</p>
-                <ul>
-                    <li>Honeymoon Fund</li>
-                    <li>Housing Fund</li>
-                </ul>
-                <p>If you'd like to give us a gift instead, we have a registry on Amazon with some things we would love
+                <p>Your love and support mean the world to us.</p>
+                <p>If you'd like to help us build our life together, a contribution would be greatly appreciated.</p>
+                <div class="registry-funds">
+                    <a class="registry-fund" href="" target="_blank">Honeymoon Fund</a>
+                    <a class="registry-fund" href="" target="_blank">Housing Fund</a>
+                </div>
+                <p>If you'd like to give us a gift instead,<br> we have a registry on Amazon with some things we would love
                     to have in our home.</p>
-                <ul>
-                    <li>Amazon Registry</li>
-                </ul>
+                <div class="registry-funds">
+                    <a class="registry-fund" href="" target="_blank">Amazon Registry</a>
+                </div>
             </div>
         </section>
 
         <section id="accommodations">
             <h2>Accommodations</h2>
-            <p>For anyone out-of-town, we've arranged special rates at:</p>
-            <ul>
-                <a
-                    href="https://www.marriott.com/en-us/hotels/oxrvm-fairfield-inn-and-suites-moorpark-ventura-county/overview/?scid=f2ae0541-1279-4f24-b197-a979c79310b0">Fairfield
-                    Inn & Suites Moorpark Ventura County</a>
-            </ul>
+            <p>For anyone out-of-town,<br>we've arranged special rates for you.</p>
+            <h4 class="hotel-name">Fairfield Inn & Suites<br> Moorpark Ventura County</h4>
+
+            <div class="hotel-details">
+                <div class="detail-row">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                    </svg>
+                    <a href="https://maps.google.com/?q=14350+White+Sage+Rd,+Moorpark,+CA+93021" target="_blank">14350
+                        White Sage Rd, Moorpark, CA 93021</a>
+                </div>
+
+                <div class="detail-row">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" />
+                    </svg>
+                    <a href="tel:+18053272000">+1 (805) 327-2000</a>
+                </div>
+
+                <div class="detail-row">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z" />
+                    </svg>
+                    Promo Code: LT2025
+                </div>
+            </div>
+
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3296.6542811674676!2d-118.8634737241551!3d34.282867105517305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80e82dff7e390fc5%3A0x73e79dc61bfa00d5!2sFairfield%20Inn%20%26%20Suites%20Moorpark%20Ventura%20County!5e0!3m2!1sen!2sus!4v1743165743369!5m2!1sen!2sus"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
         </section>
 
         <section id="activities">
@@ -561,12 +657,26 @@
         window.addEventListener('resize', updateButtonStates);
     }
 
+    function endRsvp() {
+        if (Date.now() > new Date('June 15, 2025 00:00:00').getTime()) {
+            const rsvpSection = document.querySelector('#rsvp-form');
+            rsvpSection.innerHTML = `
+                <div class="success-message">
+                    <h3>We are no longer accepting RSVPs from the site.</h3>
+                    <p>If you didn't get a change to RSVP and you plan on coming, give us a call!</p>
+                </div>
+            `;
+        }
+    }
 
     window.addEventListener('load', startCarousel('venue-carousel', 6000));
-    window.addEventListener('load', startCarousel('banner-carousel', 6000));
+    if (window.innerWidth < 600) {
+        window.addEventListener('load', startCarousel('banner-carousel', 6000));
+    }
     window.addEventListener('load', updateCountdown);
     window.addEventListener('load', initializeCarousel('.activities-container', '#activities-prev', '#activities-next'));
     window.addEventListener('load', initializeCarousel('#food-drink .activities-container', '#food-prev', '#food-next'));
+    window.addEventListener('load', endRsvp);
 </script>
 
 </html>
