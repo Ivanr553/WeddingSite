@@ -841,7 +841,7 @@ ul {
     transition: transform 0.3s ease;
 
     @media (max-width: 768px) {
-        max-width: 35%;
+        max-width: 70vw;
     }
 }
 
