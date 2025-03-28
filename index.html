@@ -272,7 +272,8 @@
                     <a class="registry-fund" href="" target="_blank">Honeymoon Fund</a>
                     <a class="registry-fund" href="" target="_blank">Housing Fund</a>
                 </div>
-                <p>If you'd like to give us a gift instead,<br> we have a registry on Amazon with some things we would love
+                <p>If you'd like to give us a gift instead,<br> we have a registry on Amazon with some things we would
+                    love
                     to have in our home.</p>
                 <div class="registry-funds">
                     <a class="registry-fund" href="" target="_blank">Amazon Registry</a>
@@ -481,6 +482,12 @@
                     <input type="number" placeholder="0" id="Children" name="Children" min="0" max="4">
                 </div>
 
+                <div class="form-group">
+                    <label for="dietary">Dietary Restrictions</label>
+                    <textarea id="dietary" name="dietary" class="dietary-input" placeholder=""></textarea>
+                </div>
+
+
                 <button type="submit">Send RSVP</button>
             </form>
         </section>
@@ -537,7 +544,8 @@
                 partner: formData.get('partner'),
                 email: formData.get('email'),
                 attending: formData.get('attending'),
-                children: formData.get('Children') == '' ? 0 : formData.get('Children')
+                children: formData.get('Children') == '' ? 0 : formData.get('Children'),
+                dietary: formData.get('dietary')
             };
 
             const request = await fetch('https://ivanjennawedding.ivanr553.workers.dev/', {

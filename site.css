@@ -993,7 +993,8 @@ ul {
 }
 
 .form-group textarea {
-    resize: vertical;
+    resize: none;
+    height: 100px;
 }
 
 button[type="submit"] {
