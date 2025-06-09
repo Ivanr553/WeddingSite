@@ -91,33 +91,9 @@
         <section id="story">
             <h2>Proposal Story</h2>
             <div class="timeline-event">
-                <p>In December of 2023 we went out to dinner at Nobu before holidays with our families. We got there
-                    right
-                    when they opened, coffees in hand, the hosts said they were available right away and escorted us to
-                    a
-                    table. Right before dessert, Ivan left for the restroom and his coat was thrown on the chair, so
-                    Jenna
-                    went to pick it up and place it nicely over the chair. As she picks it up and places it on the
-                    chair, it
-                    dawns on her that it could be The Night. She picks up the jacket again and “smooths it out” .
-                    Feeling
-                    nothing she places it back on the chair and doesn’t think about it again.</p>
+                <p>In December of 2023, before the craziness of the Christmas holidays began, Ivan planned a date night.  We drove down to Newport Beach, got coffee and, thinking there would be a wait, checked in at Nobu. We arrived just as they were opening, coffees in hand, and were able to get a table right away. After a remarkable dinner and before our dessert was served, Ivan left for the restroom, leaving his coat behind. Jenna, thinking it might be "The Night", patted down the coat to see if she could feel a ring box.  Feeling nothing, she put it back on the chair and didn't give it another thought.</p>
 
-                <p>Dinner was so early we wanted to keep enjoying the night after it, Ivan suggested a nice walk on the
-                    beach. On the way to the beach Jenna was enjoying all the Holiday lights and just being in the fun
-                    date
-                    night moment. We got to Crystal Cove, Newport Beach and walked over to the overlook. Under the
-                    bright
-                    moon enjoying the sounds of the ocean Ivan called for Jenna a couple of times (because she was
-                    enjoying
-                    the view). She looked over and he was on one knee. He was nervous, she was freaking and in the end
-                    she
-                    said YES! As he was placing the ring on, she told him, wrong hand! Trying to take it off it falls to
-                    the
-                    ground and everyone holds their breath and gasps. Feww, it did not fall through the wooden boards.
-                    He
-                    picks it up and places it on the correct hand. As they walk back to the car she stops and says,
-                    “wait did I tell you yes?”</p>
+                <p>Having such an early dinner gave us time to enjoy the rest of the evening, so Ivan suggested a walk on the beach. There were Christmas lights and decorations on the way, and we were enjoying the festivities. Ivan drove to Crystal Cove, and they arrived just as the moon was rising. Jenna was so enjoying the beautiful view of the ocean from the boardwalk that she almost missed the proposal!  After Ivan called her name twice to get her attention, she finally turned towards him and saw him down on one knee.  He was nervous, she was freaking but of course she said YES!  Then, when he was putting the engagement ring on her finger, she realized that she had given him the wrong hand. While he was taking it off to change hands, it fell onto the boardwalk, which was over a cliff with the sand and ocean far below.  Much to our relief, it did not fall through, and he was able to put it on the correct finger. As they walked back to the car, she stopped and asked, "Wait! Did I tell you yes?" </p>
 
             </div>
         </section>
@@ -203,7 +179,7 @@
                     </div>
                     <div class="timeline-content">
                         <h4>Arrival Time</h4>
-                        <time>4:30 PM</time>
+                        <time>5:00 PM</time>
                         <p>Join us as we gather to celebrate this special day. Please arrive early to find your seats
                             and greet other guests.</p>
                     </div>
@@ -215,7 +191,7 @@
                     </div>
                     <div class="timeline-content">
                         <h4>Ceremony</h4>
-                        <time>5:00 PM</time>
+                        <time>5:30 PM</time>
                         <p>Witness our exchange of vows in a beautiful outdoor ceremony surrounded by nature and loved
                             ones.</p>
                     </div>
@@ -496,22 +472,12 @@
         <section id="rsvp">
             <h2>RSVP</h2>
             <form id="rsvp-form" class="rsvp-form" onsubmit="sendRSVP(event)">
-                <div class="form-group">
+                <div id="name_container" class="form-group">
                     <label for="name">Full Name</label>
                     <input type="text" id="name" name="name" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="partner">Partner/Spouse Full Name</label>
-                    <input type="text" id="partner" name="partner">
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-
-                <div class="form-group">
+                <div id="attending_container" class="form-group">
                     <label for="attending">Will you be attending?</label>
                     <select id="attending" name="attending" required>
                         <option value="">Please select</option>
@@ -520,9 +486,24 @@
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label for="Children">Number of Children Attending</label>
-                    <input type="number" placeholder="0" id="Children" name="Children" min="0" max="4">
+                <div id="email_container" class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email">
+                </div>
+
+                <div id="number_of_guests_container" class="form-group">
+                    <label for="number_of_guests">Number of Guests in Party above 10 years old (Excluding Yourself)</label>
+                    <input type="number" name="number_of_guests" id="number_of_guests" placeholder="0" min="0" max="5">
+                </div>
+
+                <div id="meal_container" class="form-group">
+                    <label for="meal">Meal Choice</label>
+                    <select id="meal" name="meal">
+                        <option value="">Please select</option>
+                        <option value="chicken">Chicken</option>
+                        <option value="beef">Beef</option>
+                        <option value="vegetarian">Vegetarian</option>
+                    </select>
                 </div>
 
                 <button type="submit">Send RSVP</button>
@@ -574,16 +555,28 @@
         try {
             const form = document.querySelector('.rsvp-form');
             const formData = new FormData(form);
+            const numberOfGuests = parseInt(formData.get('number_of_guests')) || 0;
+            const attending = formData.get('attending');
+            
+            // Get all additional meals
+            const meals = [];
+            if(attending !== "no") {
+                meals.push({ name: formData.get('name'), meal: formData.get('meal') });
+            }
+
+            for (let i = 0; i < numberOfGuests; i++) {
+                meals.push({ name: formData.get(`name_${i + 1}`), meal: formData.get(`meal_${i + 1}`) });
+            }
 
             const data = {
                 name: formData.get('name'),
-                partner: formData.get('partner'),
-                email: formData.get('email'),
-                attending: formData.get('attending'),
-                children: formData.get('Children') == '' ? 0 : formData.get('Children')
+                email: formData.get('email') || '',
+                attending,
+                number_of_guests: numberOfGuests,
+                meals: meals,
             };
 
-            const request = await fetch('https://ivanjennawedding.ivanr553.workers.dev/', {
+            const request = await fetch('rsvp.locohub.io/rsvp', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -592,9 +585,9 @@
                 body: JSON.stringify(data)
             });
 
-            const response = await request.json();
+            const response = await request.text();
 
-            if (response.message == 'Success') {
+            if (response === "OK") {
                 const rsvpSection = document.querySelector('#rsvp-form');
                 rsvpSection.innerHTML = `
                         <div class="success-message">
@@ -710,6 +703,76 @@
     window.addEventListener('load', initializeCarousel('.activities-container', '#activities-prev', '#activities-next'));
     window.addEventListener('load', initializeCarousel('#food-drink .activities-container', '#food-prev', '#food-next'));
     window.addEventListener('load', endRsvp);
+
+    document.getElementById('number_of_guests').addEventListener('change', function() {
+        const numberOfGuests = parseInt(this.value) || 0;
+        const mealContainer = document.createElement('div');
+        mealContainer.id = 'additional-meals';
+        
+        // Remove any existing additional meal dropdowns
+        const existingContainer = document.getElementById('additional-meals');
+        if (existingContainer) {
+            existingContainer.remove();
+        }
+        
+        // Add new meal dropdowns
+        for (let i = 0; i < numberOfGuests; i++) {
+            const mealGroup = document.createElement('div');
+            mealGroup.className = 'form-group';
+            
+            const label = document.createElement('label');
+            label.htmlFor = `meal_${i + 1}`;
+            label.textContent = `Meal Choice for Guest ${i + 1}`;
+
+            const name = document.createElement('input');
+            name.type = 'text';
+            name.id = `name_${i + 1}`;
+            name.name = `name_${i + 1}`;
+            name.required = true;
+            name.placeholder = `Guest's Name`;
+            
+            const select = document.createElement('select');
+            select.id = `meal_${i + 1}`;
+            select.name = `meal_${i + 1}`;
+            select.required = true;
+            
+            const options = [
+                { value: '', text: 'Please select' },
+                { value: 'chicken', text: 'Chicken' },
+                { value: 'beef', text: 'Beef' },
+                { value: 'vegetarian', text: 'Vegetarian' }
+            ];
+            
+            options.forEach(opt => {
+                const option = document.createElement('option');
+                option.value = opt.value;
+                option.textContent = opt.text;
+                select.appendChild(option);
+            });
+            
+            mealGroup.appendChild(label);
+            mealGroup.appendChild(name);
+            mealGroup.appendChild(select);
+            mealContainer.appendChild(mealGroup);
+        }
+        
+        // Insert the new meal dropdowns before the submit button
+        const submitButton = document.querySelector('button[type="submit"]');
+        submitButton.parentNode.insertBefore(mealContainer, submitButton);
+    });
+
+    document.getElementById('attending').addEventListener('change', function() {
+        const attending = this.value;
+        if (attending === "no") {
+            document.getElementById('meal_container').hidden = true;
+            document.getElementById('email_container').hidden = true;
+            document.getElementById('number_of_guests_container').hidden = true;
+        } else {
+            document.getElementById('meal_container').hidden = false;
+            document.getElementById('email_container').hidden = false;
+            document.getElementById('number_of_guests_container').hidden = false;
+        }
+    });
 </script>
 
 </html>
