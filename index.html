@@ -91,9 +91,24 @@
         <section id="story">
             <h2>Proposal Story</h2>
             <div class="timeline-event">
-                <p>In December of 2023, before the craziness of the Christmas holidays began, Ivan planned a date night.  We drove down to Newport Beach, got coffee and, thinking there would be a wait, checked in at Nobu. We arrived just as they were opening, coffees in hand, and were able to get a table right away. After a remarkable dinner and before our dessert was served, Ivan left for the restroom, leaving his coat behind. Jenna, thinking it might be "The Night", patted down the coat to see if she could feel a ring box.  Feeling nothing, she put it back on the chair and didn't give it another thought.</p>
+                <p>In December of 2023, before the craziness of the Christmas holidays began, Ivan planned a date night.
+                    We drove down to Newport Beach, got coffee and, thinking there would be a wait, checked in at Nobu.
+                    We arrived just as they were opening, coffees in hand, and were able to get a table right away.
+                    After a remarkable dinner and before our dessert was served, Ivan left for the restroom, leaving his
+                    coat behind. Jenna, thinking it might be "The Night", patted down the coat to see if she could feel
+                    a ring box. Feeling nothing, she put it back on the chair and didn't give it another thought.</p>
 
-                <p>Having such an early dinner gave us time to enjoy the rest of the evening, so Ivan suggested a walk on the beach. There were Christmas lights and decorations on the way, and we were enjoying the festivities. Ivan drove to Crystal Cove, and they arrived just as the moon was rising. Jenna was so enjoying the beautiful view of the ocean from the boardwalk that she almost missed the proposal!  After Ivan called her name twice to get her attention, she finally turned towards him and saw him down on one knee.  He was nervous, she was freaking but of course she said YES!  Then, when he was putting the engagement ring on her finger, she realized that she had given him the wrong hand. While he was taking it off to change hands, it fell onto the boardwalk, which was over a cliff with the sand and ocean far below.  Much to our relief, it did not fall through, and he was able to put it on the correct finger. As they walked back to the car, she stopped and asked, "Wait! Did I tell you yes?" </p>
+                <p>Having such an early dinner gave us time to enjoy the rest of the evening, so Ivan suggested a walk
+                    on the beach. There were Christmas lights and decorations on the way, and we were enjoying the
+                    festivities. Ivan drove to Crystal Cove, and they arrived just as the moon was rising. Jenna was so
+                    enjoying the beautiful view of the ocean from the boardwalk that she almost missed the proposal!
+                    After Ivan called her name twice to get her attention, she finally turned towards him and saw him
+                    down on one knee. He was nervous, she was freaking but of course she said YES! Then, when he was
+                    putting the engagement ring on her finger, she realized that she had given him the wrong hand. While
+                    he was taking it off to change hands, it fell onto the boardwalk, which was over a cliff with the
+                    sand and ocean far below. Much to our relief, it did not fall through, and he was able to put it on
+                    the correct finger. As they walked back to the car, she stopped and asked, "Wait! Did I tell you
+                    yes?" </p>
 
             </div>
         </section>
@@ -276,8 +291,14 @@
                 </div>
 
                 <div class="detail-row">
-                    When you call to book your hotel room, 
+                    If you call to book your hotel room,
                     <br>ask to be added to the Andrews/Raffucci Wedding Block to receive a discounted rate
+                </div>
+
+                <div>
+                    <a
+                        href="https://www.marriott.com/event-reservations/reservation-link.mi?id=1744337588810&key=GRP&guestreslink2=true&app=resvlink">Link
+                        to book online</a>
                 </div>
             </div>
 
@@ -489,7 +510,8 @@
                 </div>
 
                 <div id="number_of_guests_container" class="form-group">
-                    <label for="number_of_guests">Number of Guests in Party above 10 years old (Excluding Yourself)</label>
+                    <label for="number_of_guests">Number of Guests in Party above 10 years old (Excluding
+                        Yourself)</label>
                     <input type="number" name="number_of_guests" id="number_of_guests" placeholder="0" min="0" max="5">
                 </div>
 
@@ -554,10 +576,10 @@
             const formData = new FormData(form);
             const numberOfGuests = parseInt(formData.get('number_of_guests')) || 0;
             const attending = formData.get('attending');
-            
+
             // Get all additional meals
             const meals = [];
-            if(attending !== "no") {
+            if (attending !== "no") {
                 meals.push({ name: formData.get('name'), meal: formData.get('meal') });
             }
 
@@ -701,22 +723,22 @@
     window.addEventListener('load', initializeCarousel('#food-drink .activities-container', '#food-prev', '#food-next'));
     window.addEventListener('load', endRsvp);
 
-    document.getElementById('number_of_guests').addEventListener('change', function() {
+    document.getElementById('number_of_guests').addEventListener('change', function () {
         const numberOfGuests = parseInt(this.value) || 0;
         const mealContainer = document.createElement('div');
         mealContainer.id = 'additional-meals';
-        
+
         // Remove any existing additional meal dropdowns
         const existingContainer = document.getElementById('additional-meals');
         if (existingContainer) {
             existingContainer.remove();
         }
-        
+
         // Add new meal dropdowns
         for (let i = 0; i < numberOfGuests; i++) {
             const mealGroup = document.createElement('div');
             mealGroup.className = 'form-group';
-            
+
             const label = document.createElement('label');
             label.htmlFor = `meal_${i + 1}`;
             label.textContent = `Meal Choice for Guest ${i + 1}`;
@@ -727,38 +749,38 @@
             name.name = `name_${i + 1}`;
             name.required = true;
             name.placeholder = `Guest's Name`;
-            
+
             const select = document.createElement('select');
             select.id = `meal_${i + 1}`;
             select.name = `meal_${i + 1}`;
             select.required = true;
-            
+
             const options = [
                 { value: '', text: 'Please select' },
                 { value: 'chicken', text: 'Chicken' },
                 { value: 'beef', text: 'Beef' },
                 { value: 'vegetarian', text: 'Vegetarian' }
             ];
-            
+
             options.forEach(opt => {
                 const option = document.createElement('option');
                 option.value = opt.value;
                 option.textContent = opt.text;
                 select.appendChild(option);
             });
-            
+
             mealGroup.appendChild(label);
             mealGroup.appendChild(name);
             mealGroup.appendChild(select);
             mealContainer.appendChild(mealGroup);
         }
-        
+
         // Insert the new meal dropdowns before the submit button
         const submitButton = document.querySelector('button[type="submit"]');
         submitButton.parentNode.insertBefore(mealContainer, submitButton);
     });
 
-    document.getElementById('attending').addEventListener('change', function() {
+    document.getElementById('attending').addEventListener('change', function () {
         const attending = this.value;
         if (attending === "no") {
             document.getElementById('meal_container').hidden = true;
